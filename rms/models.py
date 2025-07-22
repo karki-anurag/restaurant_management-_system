@@ -59,4 +59,14 @@ class Storage(models.Model):
 class Recipe(models.Model):
     menu_item = models.OneToOneField(MenuItems, on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True)
-    ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredient')
+    
+class RecipeIngredient(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    quantity = models.FloatField()
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return f"{self.ingredient.name} - {self.quantity} in {self.recipe.menu_item.Items_name}"
+    
